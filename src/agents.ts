@@ -44,7 +44,14 @@ export class Agent {
     };
 
     this.configureTools(requestParams);
+    this.configureStructuredOutput(requestParams);
     return requestParams;
+  }
+
+  private configureStructuredOutput(requestParams: OpenAIRequestParams): void {
+    if (this.config.responseFormat) {
+      requestParams.response_format = this.config.responseFormat;
+    }
   }
 
   private configureTools(requestParams: OpenAIRequestParams): void {
@@ -108,8 +115,16 @@ export class Agent {
   private handleRegularResponse(message: any): AgentResult {
     let finalOutput = message?.content || '';
     
-    // If outputType is specified, try to parse as JSON
-    if (this.config.outputType && finalOutput) {
+    // If we have structured output configured, the response should already be properly formatted JSON
+    if (this.config.responseFormat) {
+      try {
+        finalOutput = JSON.parse(finalOutput);
+      } catch (error) {
+        console.error('Failed to parse structured output:', error);
+        throw new Error('Received invalid JSON from structured output');
+      }
+    } else if (this.config.outputType && finalOutput) {
+      // Fallback to the original JSON parsing logic for backward compatibility
       try {
         finalOutput = JSON.parse(finalOutput);
       } catch {
