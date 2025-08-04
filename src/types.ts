@@ -15,6 +15,7 @@ export interface ReportData {
 
 export interface AgentResult<T = any> {
   finalOutput: T;
+  traceId?: string;
 }
 
 export interface ModelSettings {
