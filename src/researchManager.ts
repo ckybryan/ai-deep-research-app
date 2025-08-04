@@ -18,10 +18,17 @@ export class ResearchManager {
       yield 'Searches complete, writing report...';
       
       const report = await this.writeReport(query, searchResults);
-      yield 'Report written, sending email...';
       
-      await this.sendEmail(report);
-      yield 'Email sent, research complete';
+      // Check if email should be sent
+      if (process.env.SENDGRID_API_KEY) {
+        yield 'Report written, sending email...';
+        await this.sendEmail(report);
+        yield 'Email sent, research complete';
+      } else {
+        yield 'Report written, email skipped (no SendGrid key)';
+        yield 'Research complete';
+      }
+      
       yield report.markdownReport;
     } catch (error) {
       console.error('Research error:', error);
@@ -81,6 +88,12 @@ export class ResearchManager {
   }
 
   private async sendEmail(report: ReportData): Promise<void> {
+    // Skip email sending if SendGrid API key is not configured
+    if (!process.env.SENDGRID_API_KEY) {
+      console.log('SendGrid API key not found, skipping email phase');
+      return;
+    }
+
     console.log('Writing email...');
     try {
       const result = await Runner.run(emailAgent, report.markdownReport);
