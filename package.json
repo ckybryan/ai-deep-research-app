@@ -1,28 +1,28 @@
 {
-  "name": "deep-research-typescript",
+  "name": "deep-research-ts",
   "version": "1.0.0",
-  "description": "TypeScript implementation of deep research AI agents",
+  "description": "TypeScript version of the deep research application",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/server.js",
-    "dev": "ts-node server.ts",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "cli": "ts-node src/cli.ts",
     "watch": "tsc --watch"
   },
+  "keywords": ["research", "ai", "typescript"],
+  "author": "",
+  "license": "MIT",
   "dependencies": {
-    "openai-agents": "^1.1.0",
+    "dotenv": "^16.3.1",
+    "openai": "^4.38.0",
     "express": "^4.18.2",
-    "@sendgrid/mail": "^8.1.0",
-    "dotenv": "^16.4.1",
-    "zod": "^3.22.4"
+    "@sendgrid/mail": "^7.7.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.19",
+    "@types/node": "^20.10.0",
     "@types/express": "^4.17.21",
-    "typescript": "^5.3.3",
-    "ts-node": "^10.9.2"
-  },
-  "keywords": ["ai", "agents", "research", "typescript"],
-  "author": "Your Name",
-  "license": "MIT"
+    "typescript": "^5.3.2",
+    "ts-node": "^10.9.1"
+  }
 }
