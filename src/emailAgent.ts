@@ -30,8 +30,8 @@ const sendEmailTool = {
 
 export async function sendEmail(subject: string, htmlBody: string): Promise<{ status: string }> {
   try {
-    const fromEmail = process.env.FROM_EMAIL || 'ed@edwarddonner.com'; // put your verified sender here
-    const toEmail = process.env.TO_EMAIL || 'ed.donner@gmail.com'; // put your recipient here
+    const fromEmail = process.env.FROM_EMAIL || 'noreply@example.com'; // put your verified sender here
+    const toEmail = process.env.TO_EMAIL || 'user@example.com'; // put your recipient here
     
     const msg = {
       to: toEmail,
