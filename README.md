@@ -65,20 +65,7 @@ npm start
 npm run cli "Your research query here"
 ```
 
-### Tracing Test
-```bash
-npm run test-trace
-```
-
 The web application will be available at `http://localhost:3000`
-
-## 🔍 OpenAI Tracing
-
-This application includes comprehensive OpenAI tracing integration for monitoring and debugging AI agent interactions. See [TRACING.md](./TRACING.md) for detailed information about:
-- Trace ID generation and management
-- Agent-level tracing with performance metrics
-- OpenAI Platform integration
-- Debugging and monitoring capabilities
 
 ## API Endpoints
 
